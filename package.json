@@ -1,6 +1,6 @@
 {
   "name": "cfmerge",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Merge CloudFormation templates into one",
   "main": "bin/cfmerge.js",
   "scripts": {
