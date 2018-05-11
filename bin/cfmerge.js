@@ -50,7 +50,7 @@ if (typeof f.lambda !== 'undefined') {
 			debug(`\t${f.lambda.files[i]}`);
 
 //			var lin = fs.readFileSync(f.lambda.files[i]);
-			var lin = YAML.load(f.lambda.files[i]);
+			var lin = YAML.load(path.join(process.env.CFMERGE_PREFIX_DIR,f.lambda.files[i])); // f.lambda.files[i]);
 //			debug(JSON.stringify(lin, null, 2));
 			//t.Resources = lin.Resources;
 
@@ -69,10 +69,20 @@ if (typeof f.apigw !== 'undefined') {
 	if (f.apigw.exclude === true) {
 		debug("\tskipping...");
 	} else {
-		var apigw = fs.readFileSync(path.join(process.env.CFMERGE_PREFIX_DIR,f.apigw.file));
-	
-		t.Resources[f.apigw.name] = f.apigw.header;
+//		var apigw = fs.readFileSync(path.join(process.env.CFMERGE_PREFIX_DIR,f.apigw.file));
+//		t.Resources[f.apigw.name] = f.apigw.header;
 //		t.Resources.
+
+                for (var i=0; i < f.apigw.files.length; i++) {
+
+                        debug(`\t${f.apigw.files[i]}`);
+                        var lin = YAML.load(path.join(process.env.CFMERGE_PREFIX_DIR,f.apigw.files[i]));
+
+                        for(var key in lin.Resources){
+                                t.Resources[key] = lin.Resources[key];
+                        }
+                }
+
 	}
 }
 
@@ -80,5 +90,5 @@ if (typeof f.apigw !== 'undefined') {
 t.Transform = 'AWS::Serverless-2016-10-31';
 
 debug("\n\n");
-console.log(YAML.stringify(t, 4));
+console.log(YAML.stringify(t, 16));
 
