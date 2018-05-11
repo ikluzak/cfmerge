@@ -1,0 +1,23 @@
+{
+  "name": "cfmerge",
+  "version": "0.0.2",
+  "description": "Merge CloudFormation templates into one",
+  "main": "bin/cfmerge.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "cfmerge": "bin/cfmerge.js"
+  },
+  "keywords": [
+    "CloudFormation",
+    "Cloud",
+    "Formation",
+    "merge"
+  ],
+  "author": "Ivan Kluzak",
+  "license": "ISC",
+  "dependencies": {
+    "yamljs": "^0.3.0"
+  }
+}
